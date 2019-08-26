@@ -28,7 +28,8 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || []; // this makes items available on page load
+  // is there something available in local storage? if not, empty array
 
 
   function addItem(e) {
@@ -43,6 +44,8 @@
    
     items.push(item); // pushes it to items array
     populateList(items, itemsList);
+    // this creates a data item inside local storage:
+    localStorage.setItem('items', JSON.stringify(items)); // (key, value), only takes strings!
     this.reset(); // clears form element
   }
 
@@ -60,6 +63,8 @@
   }
 
   addItems.addEventListener('submit', addItem);
+  // last thing on page load:
+  populateList(items, itemsList); // items doesn't exist on page load!
 
 </script>
 
