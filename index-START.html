@@ -23,6 +23,8 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <button class="reset">Clear All</button>
+
   </div>
 
 <script>
@@ -86,6 +88,18 @@
   populateList(items, itemsList); // items doesn't exist on page load!
 
   // To do: add clear all/ reset button AND check all button!
+  // Clear all button
+  const reset = document.querySelector('.reset');
+
+  function clearAll() {
+    // clear storage
+    localStorage.clear();
+    // update DOM
+    window.location.reload();
+  }
+
+  reset.addEventListener('click', clearAll);
+
 
 </script>
 
