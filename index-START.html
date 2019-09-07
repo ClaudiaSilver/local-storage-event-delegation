@@ -52,7 +52,7 @@
     this.reset(); // clears form element
   }
 
-
+  // this function updates the dom
   function populateList(plates = [], platesList) {
     platesList.innerHTML = plates.map((plate, i) =>{
       return `
@@ -88,34 +88,28 @@
   // last thing on page load:
   populateList(items, itemsList); // items doesn't exist on page load!
 
+  // Add two more buttons
   
   // Clear all button:
   const reset = document.querySelector('.reset');
 
-
   function clearAll() {
     // clear storage
     localStorage.clear();
-    // update DOM through page reload
-    window.location.reload();
+    // update DOM 
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList([], itemsList);
   }
 
   reset.addEventListener('click', clearAll);
 
   // Check all button:
   const checkAll = document.querySelector('.check-all');
-  const checkboxes = document.querySelectorAll('input[type=checkbox]');
-
-  //  This doesn't work if a box is unticked (won't retick it) - unless page is refreshed
+  
   function checkAllBoxes() {
-    
-    checkboxes.forEach(el => {
-      //el.addEventListener('click', function() { 
-      el.checked == false ? el.checked = true : '';
-      
-    })
-   // })
-
+    items.forEach(el => el.done = true);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
   };
 
   checkAll.addEventListener('click', checkAllBoxes);
