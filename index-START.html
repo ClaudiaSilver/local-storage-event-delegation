@@ -24,6 +24,7 @@
       <input type="submit" value="+ Add Item">
     </form>
     <button class="reset">Clear All</button>
+    <button class="check-all">Check All</button>
 
   </div>
 
@@ -87,19 +88,37 @@
   // last thing on page load:
   populateList(items, itemsList); // items doesn't exist on page load!
 
-  // To do: add clear all/ reset button AND check all button!
-  // Clear all button
+  
+  // Clear all button:
   const reset = document.querySelector('.reset');
+
 
   function clearAll() {
     // clear storage
     localStorage.clear();
-    // update DOM
+    // update DOM through page reload
     window.location.reload();
   }
 
   reset.addEventListener('click', clearAll);
 
+  // Check all button:
+  const checkAll = document.querySelector('.check-all');
+  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+  //  This doesn't work if a box is unticked (won't retick it) - unless page is refreshed
+  function checkAllBoxes() {
+    
+    checkboxes.forEach(el => {
+      //el.addEventListener('click', function() { 
+      el.checked == false ? el.checked = true : '';
+      
+    })
+   // })
+
+  };
+
+  checkAll.addEventListener('click', checkAllBoxes);
 
 </script>
 
